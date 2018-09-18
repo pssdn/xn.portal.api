@@ -14,9 +14,9 @@ export const loadClientPortal = ({ clientID }) => {
         } else {
           const db = mongoClient.db(clientID);
 
-          const trees = db.collection("clients");
+          const clients = db.collection("clients");
 
-          trees.findOne({}, (error, result) => {
+          clients.findOne({}, (error, result) => {
             if (error) {
               reject(error);
             } else {
