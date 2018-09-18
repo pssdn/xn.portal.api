@@ -13,7 +13,20 @@ app.get("/", (request, response) => {
   response.json({ service: "xn.portal.api" });
 });
 
-app.use("/:client/portal", portalWebAPI);
+const mapClient = (request, response, next) => {
+  switch (request.params.client) {
+    case "c1a1cdb5-9b4c-45f5-a0d7-01b9257ccd8d":
+      response.locals.client = "CLI0";
+      break;
+    case "a3946eb8-460a-42a5-9a70-18359764a973":
+      response.locals.client = "C0003";
+      break;
+  }
+
+  next();
+};
+
+app.use("/:client/portal", mapClient, portalWebAPI);
 
 const port = 10000;
 
